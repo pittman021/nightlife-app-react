@@ -1,0 +1,25 @@
+{
+  "name": "nightlife-app",
+  "version": "1.0.0",
+  "description": "Nightlife App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "yelp": "^1.0.2"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0"
+  }
+}

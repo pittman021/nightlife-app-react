@@ -36,6 +36,5 @@ app.get('/auth/google', (req, res) => {
   res.send('logging in to google');
 });
 
-app.listen(8000, function() {
-  console.log('Server started');
-});
+const PORT = process.env.PORT || 8000;
+app.listen(PORT);

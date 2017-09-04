@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const Yelp = require('yelp');
+require('./routes/authRoutes');
 
 const app = express();
 
@@ -30,10 +31,6 @@ app.get('/api/yelp', (req, res) => {
     .catch(function(err) {
       console.error(err);
     });
-});
-
-app.get('/auth/google', (req, res) => {
-  res.send('logging in to google');
 });
 
 const PORT = process.env.PORT || 8000;

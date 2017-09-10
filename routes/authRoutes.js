@@ -1,11 +1,24 @@
 const passport = require('passport');
 
 module.exports = app => {
-  app.get('/', (req, res) => {
-    res.send('logging in to google');
-  });
+  app.get(
+    '/auth/google',
+    passport.authenticate('google', {
+      scope: ['profile', 'email']
+    })
+  );
 
-  app.get('/auth/google', (req, res) => {
-    res.send('logging in to google');
+  // query contains the google user code, passport auto handles this //
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/auth/google/fail' }),
+    function(req, res) {
+      res.redirect('/');
+    }
+  );
+
+  app.get('/api/logout', (req, res) => {
+    req.logout();
+    res.send(req.user);
   });
 };

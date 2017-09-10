@@ -1,20 +1,40 @@
+const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const mongoose = require('mongoose');
+const keys = require('../config/keys');
 
-// GOOGLE AUTH ROUTES //
+const User = mongoose.model('users');
 
-const GOOGLE_CLIENT_ID =
-  '936081905425-kah8hm08e1ug3m9evvlbtktnqbg56mgv.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = 'AGAy-2undjEMu8XOg2MGUIMr';
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user);
+  });
+});
+
+// Passport Google Strategy //
 
 passport.use(
   new GoogleStrategy(
     {
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: 'https://nightlife-app-react.herokuapp.com/'
+      clientID: keys.GOOGLE_CLIENT_ID,
+      clientSecret: keys.GOOGLE_CLIENT_SECRET,
+      callbackURL: '/auth/google/callback',
+      proxy: true
     },
-    function(accessToken, refreshToken, profile, cb) {
-      // find user or create one
+    (accessToken, refreshToken, profile, done) => {
+      User.findOne({ googleId: profile.id }).then(existingUser => {
+        if (existingUser) {
+          done(null, existingUser);
+        } else {
+          new User({ googleId: profile.id })
+            .save()
+            .then(user => done(null, user));
+        }
+      });
     }
   )
 );

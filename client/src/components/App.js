@@ -21,7 +21,7 @@ class App extends Component {
     axios
       .get(`/api/yelp?location=${term}`)
       .then(res => {
-        this.setState({ bars: res.data.businesses });
+        this.setState({ bars: res.data });
       })
       .catch(function(err) {
         console.log(err);

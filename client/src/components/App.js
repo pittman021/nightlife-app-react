@@ -22,10 +22,20 @@ class App extends Component {
       .get(`/api/yelp?location=${term}`)
       .then(res => {
         this.setState({ bars: res.data });
+        console.log(this.state);
       })
       .catch(function(err) {
         console.log(err);
       });
+  }
+
+  updateRsvp(term) {
+    var that = this;
+    axios.post('/rsvp/' + term).then(res => {
+      const bar = res.data.bar;
+      console.log(that.state);
+      // this.setState({ barId["res.data.bar"].count++ });
+    });
   }
 
   render() {
@@ -36,7 +46,7 @@ class App extends Component {
       <div className="container">
         <Header />
         <Search onSearchTermChange={fetchBars} />
-        <BarList bars={this.state.bars} />
+        <BarList onRsvp={this.updateRsvp} bars={this.state.bars} />
       </div>
     );
   }

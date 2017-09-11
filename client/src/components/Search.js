@@ -15,7 +15,7 @@ class Search extends Component {
             value={this.state.term}
             onChange={event => this.onInputChange(event.target.value)}
           />
-          <label for="location">Location</label>
+          <label htmlFor="location">Location</label>
         </div>
       </div>
     );

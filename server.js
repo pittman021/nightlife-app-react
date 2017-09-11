@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
+const methodOverride = require('method-override');
 const cookieSession = require('cookie-session');
 require('./models/User');
 require('./models/Rsvp');
@@ -23,6 +24,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 bodyParser.urlencoded({ extended: true });
 

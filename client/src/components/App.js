@@ -30,11 +30,33 @@ class App extends Component {
   }
 
   updateRsvp(term) {
-    var that = this;
     axios.post('/rsvp/' + term).then(res => {
-      const bar = res.data.bar;
-      console.log(that.state);
-      // this.setState({ barId["res.data.bar"].count++ });
+      const newBar = res.data;
+      const bars = this.state.bars;
+
+      bars.forEach(bar => {
+        if (bar.barId === res.data.id) {
+          bar.count += 1;
+        }
+      });
+
+      this.setState({ bars: bars });
+    });
+  }
+
+  deleteRsvp(term) {
+    axios.delete('/rsvp/' + term).then(res => {
+      const removeBar = res;
+      const bars = this.state.bars;
+      console.log(res);
+
+      bars.forEach(bar => {
+        if (bar.barId === res.data.id) {
+          bar.count > 0 ? --bar.count : 0;
+        }
+      });
+
+      this.setState({ bars: bars });
     });
   }
 
@@ -42,11 +64,16 @@ class App extends Component {
     const fetchBars = _.debounce(term => {
       this.fetchBars(term);
     }, 300);
+
     return (
       <div className="container">
         <Header />
         <Search onSearchTermChange={fetchBars} />
-        <BarList onRsvp={this.updateRsvp} bars={this.state.bars} />
+        <BarList
+          onRsvp={this.updateRsvp.bind(this)}
+          onDeleteRsvp={this.deleteRsvp.bind(this)}
+          bars={this.state.bars}
+        />
       </div>
     );
   }

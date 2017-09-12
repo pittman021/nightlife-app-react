@@ -4,9 +4,7 @@ class Bar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bgcolor: 'red',
-      status: 'Not Going',
-      action: ''
+      bColor: 'green'
     };
   }
 
@@ -19,21 +17,11 @@ class Bar extends Component {
             {this.props.bar.name}
           </span>
           <button
-            onClick={event => this.handleClick(event)}
-            id={this.props.bar.barId}
-            className={'btn ' + this.state.bgcolor}
-          >
-            Not Going
-          </button>
-          <p>
-            {this.props.bar.count}
-          </p>
-          <button
-            onClick={event => this.handleClick(event)}
-            className="btn green"
+            onClick={event => this.addRsvp(event)}
+            className={'btn ' + this.state.bColor}
             id={this.props.bar.barId}
           >
-            Not Going
+            RSVP
           </button>
           <p>
             {this.props.bar.count}
@@ -43,9 +31,19 @@ class Bar extends Component {
     );
   }
 
-  handleClick(e) {
+  addRsvp(e) {
     e.stopPropagation();
-    this.props.onRsvp(e.target.id);
+    if (e.target.className === 'btn green') {
+      this.props.onRsvp(e.target.id);
+      this.setState({ bColor: 'red' });
+    } else {
+      this.props.onDeleteRsvp(e.target.id);
+      this.setState({ bColor: 'green' });
+    }
+  }
+
+  removeRsvp(e) {
+    e.stopPropagation();
   }
 }
 

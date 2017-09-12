@@ -3,7 +3,14 @@ import Bar from './Bar';
 
 const BarList = props => {
   const barItems = props.bars.map(function(bar) {
-    return <Bar bar={bar} key={bar.barId} onRsvp={props.onRsvp} />;
+    return (
+      <Bar
+        bar={bar}
+        key={bar.barId}
+        onRsvp={props.onRsvp}
+        onDeleteRsvp={props.onDeleteRsvp}
+      />
+    );
   });
 
   return (

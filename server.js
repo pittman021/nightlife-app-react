@@ -11,7 +11,7 @@ require('./services/passport');
 
 const Rsvp = mongoose.model('rsvp');
 
-mongoose.connect(keys.MONGO_URI);
+mongoose.connect(keys.mongoURI);
 
 const app = express();
 

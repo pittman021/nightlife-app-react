@@ -2,15 +2,14 @@ const Yelp = require('yelp');
 const yelpQuery = require('../controller/yelpQuery.js');
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
-mongoose.Promise = require('bluebird');
 
 const Rsvp = mongoose.model('rsvp');
 
 var fetchYelp = new Yelp({
-  consumer_key: keys.YELP_CONSUMER_KEY,
-  consumer_secret: keys.YELP_CONSUMER_SECRET,
-  token: keys.YELP_TOKEN,
-  token_secret: keys.YELP_TOKEN_SECRET
+  consumer_key: keys.yelpConsumerKey,
+  consumer_secret: keys.yelpConsumerSecret,
+  token: keys.yelpToken,
+  token_secret: keys.yelpTokenSecret
 });
 
 module.exports = app => {

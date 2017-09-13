@@ -24,11 +24,17 @@ module.exports = app => {
         const dbBars = await Rsvp.find({});
         const newData = cleanData(data);
         const dearGod = [];
+        const user = req.user.id;
 
         newData.map(bar => {
           dbBars.map(dbBar => {
             if (dbBar.barId === bar.barId) {
               bar.count = dbBar.users.length || 0;
+
+              const idx = dbBar.users.indexOf(user);
+              if (idx != -1) {
+                bar.userGoing = true;
+              }
             }
           });
         });
@@ -47,7 +53,8 @@ function cleanData(data) {
       barId: bar.id,
       name: bar.name,
       image: bar.image_url,
-      count: 0
+      count: 0,
+      userGoing: false
     });
   });
   return newData;

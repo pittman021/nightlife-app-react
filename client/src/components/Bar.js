@@ -4,18 +4,28 @@ class Bar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bColor: 'green'
+      bColor: ''
     };
+  }
+
+  componentWillMount() {
+    if (this.props.bar.userGoing === true) {
+      this.setState({ bColor: 'green' });
+    } else {
+      this.setState({ bColor: 'red' });
+    }
   }
 
   render() {
     return (
-      <div className="bar">
-        <li>
+      <div className="col s12 m12 l12 bar">
+        <div className="col s12 m4 l8">
           <img alt="logo" src={this.props.bar.image} />
           <span>
             {this.props.bar.name}
           </span>
+        </div>
+        <div className="col s12 m4 l2">
           <button
             onClick={event => this.addRsvp(event)}
             className={'btn ' + this.state.bColor}
@@ -26,19 +36,20 @@ class Bar extends Component {
           <p>
             {this.props.bar.count}
           </p>
-        </li>
+        </div>
       </div>
     );
   }
 
   addRsvp(e) {
     e.stopPropagation();
-    if (e.target.className === 'btn green') {
+    console.log(e.target.className);
+    if (e.target.className === 'btn red') {
       this.props.onRsvp(e.target.id);
-      this.setState({ bColor: 'red' });
+      this.setState({ bColor: 'green' });
     } else {
       this.props.onDeleteRsvp(e.target.id);
-      this.setState({ bColor: 'green' });
+      this.setState({ bColor: 'red' });
     }
   }
 

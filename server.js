@@ -9,11 +9,15 @@ require('./models/User');
 require('./models/Rsvp');
 require('./services/passport');
 
+const app = express();
+
 const Rsvp = mongoose.model('rsvp');
 
 mongoose.connect(keys.mongoURI);
 
-const app = express();
+require('./routes/rsvpRoutes')(app);
+require('./routes/authRoutes')(app);
+require('./routes/yelpRoutes')(app);
 
 app.use(
   cookieSession({
@@ -21,16 +25,11 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 
 bodyParser.urlencoded({ extended: true });
-
-require('./routes/rsvpRoutes')(app);
-require('./routes/authRoutes')(app);
-require('./routes/yelpRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

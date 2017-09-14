@@ -28,10 +28,6 @@ app.use(methodOverride('_method'));
 
 bodyParser.urlencoded({ extended: true });
 
-app.get('/', (req, res) => {
-  res.send('Home');
-});
-
 require('./routes/rsvpRoutes')(app);
 require('./routes/authRoutes')(app);
 require('./routes/yelpRoutes')(app);

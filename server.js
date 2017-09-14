@@ -32,7 +32,7 @@ require('./routes/rsvpRoutes')(app);
 require('./routes/authRoutes')(app);
 require('./routes/yelpRoutes')(app);
 
-app.post('/api', function(req, res) {
+app.get('/api', function(req, res) {
   res.send('api stuff here');
 });
 

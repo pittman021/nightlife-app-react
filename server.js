@@ -32,10 +32,6 @@ require('./routes/rsvpRoutes')(app);
 require('./routes/authRoutes')(app);
 require('./routes/yelpRoutes')(app);
 
-app.get('/api', function(req, res) {
-  res.send('api stuff here');
-});
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   // express willl serve up prod assets

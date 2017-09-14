@@ -17,6 +17,10 @@ module.exports = app => {
     }
   );
 
+  app.get('auth/google/fail', function(req, res) {
+    res.send('google fail');
+  });
+
   app.get('/api/logout', (req, res) => {
     req.logout();
     res.send(req.user);

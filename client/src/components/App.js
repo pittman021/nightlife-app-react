@@ -31,6 +31,9 @@ class App extends Component {
 
   updateRsvp(term) {
     axios.post('/rsvp/' + term).then(res => {
+      if (res.data !== 'tim') {
+        window.location.href = '/auth/google';
+      }
       const newBar = res.data;
       const bars = this.state.bars;
 

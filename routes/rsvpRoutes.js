@@ -2,24 +2,16 @@ const mongoose = require('mongoose');
 const Rsvp = mongoose.model('rsvp');
 
 module.exports = app => {
-  //   function isAuthenticated(req, res, next) {
-  //     // do any checks you want to in here
-  //
-  //     // CHECK THE USER STORED IN SESSION FOR A CUSTOM VARIABLE
-  //     // you can do this however you want with whatever variables you set up
-  //     // if (req.user.authenticated) return next();
-  // console
-  //     if (req.session != undefined) {
-  //       return next();
-  //     } else {
-  //       res.redirect('/auth/google');
-  //     }
-  //
-  //     // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
-  //   }
+  function isAuthenticated(req, res, next) {
+    if (req.user) {
+      next();
+    } else {
+      res.json({ redirectURI: '/auth/google' });
+    }
+  }
 
   // RSVP User //
-  app.post('/rsvp/:id', async (req, res) => {
+  app.post('/rsvp/:id', isAuthenticated, async (req, res) => {
     const barWithUser = await Rsvp.find({
       barId: req.params.id,
       users: req.user.id

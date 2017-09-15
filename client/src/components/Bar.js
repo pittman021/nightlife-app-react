@@ -43,7 +43,6 @@ class Bar extends Component {
 
   addRsvp(e) {
     e.stopPropagation();
-    console.log(e.target.className);
     if (e.target.className === 'btn red') {
       this.props.onRsvp(e.target.id);
       this.setState({ bColor: 'green' });

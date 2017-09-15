@@ -19,7 +19,7 @@ module.exports = app => {
   //   }
 
   // RSVP User //
-  app.post('/rsvp/:id', isAuthenticated, async (req, res) => {
+  app.post('/rsvp/:id', async (req, res) => {
     const barWithUser = await Rsvp.find({
       barId: req.params.id,
       users: req.user.id
@@ -53,7 +53,7 @@ module.exports = app => {
   });
 
   // Remove RSVP for user //
-  app.delete('/rsvp/:id', isAuthenticated, async (req, res) => {
+  app.delete('/rsvp/:id', async (req, res) => {
     console.log('delete route');
     const deletedBar = await Rsvp.findOneAndUpdate(
       { barId: req.params.id },

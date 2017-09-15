@@ -23,7 +23,7 @@ module.exports = app => {
         const dbBars = await Rsvp.find({});
         const newData = cleanData(data);
         const dearGod = [];
-        const user = req.user.id;
+        const user = req.user ? req.user.id : 0;
 
         newData.map(bar => {
           dbBars.map(dbBar => {
@@ -31,6 +31,7 @@ module.exports = app => {
               bar.count = dbBar.users.length || 0;
 
               const idx = dbBar.users.indexOf(user);
+
               if (idx != -1) {
                 bar.userGoing = true;
               }

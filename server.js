@@ -32,6 +32,7 @@ require('./routes/authRoutes')(app);
 require('./routes/yelpRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
+  console.log(process.env.NODE_ENV);
   app.use(express.static('client/build'));
   // express willl serve up prod assets
   // like main.js file, or main.css file
@@ -42,6 +43,9 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
+}
+if (process.env.NODE_ENV != 'production') {
+  console.log(process.env.NODE_ENV);
 }
 
 const PORT = process.env.PORT || 8000;

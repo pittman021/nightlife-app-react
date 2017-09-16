@@ -8,7 +8,12 @@ const Header = () => {
           Nightlife App
         </a>
         <ul className="right">
-          <a href="/auth/google">Login</a>
+          <li>
+            <a href="/api/logout">Logout</a>
+          </li>
+          <li>
+            <a href="/auth/google">Login</a>
+          </li>
         </ul>
       </div>
     </nav>

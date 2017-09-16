@@ -31,19 +31,21 @@ class App extends Component {
 
   updateRsvp(term) {
     axios.post('/rsvp/' + term).then(res => {
-      if (res.data !== 'tim') {
+      console.log(res);
+      if (res.data.redirectURI === true) {
         window.location.href = '/auth/google';
+      } else {
+        const newBar = res.data;
+        const bars = this.state.bars;
+
+        bars.forEach(bar => {
+          if (bar.barId === res.data.id) {
+            bar.count += 1;
+          }
+        });
+
+        this.setState({ bars: bars });
       }
-      const newBar = res.data;
-      const bars = this.state.bars;
-
-      bars.forEach(bar => {
-        if (bar.barId === res.data.id) {
-          bar.count += 1;
-        }
-      });
-
-      this.setState({ bars: bars });
     });
   }
 

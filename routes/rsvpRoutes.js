@@ -1,15 +1,8 @@
 const mongoose = require('mongoose');
 const Rsvp = mongoose.model('rsvp');
+const isAuthenticated = require('../middleware/auth.js');
 
 module.exports = app => {
-  function isAuthenticated(req, res, next) {
-    if (req.user) {
-      next();
-    } else {
-      res.json({ redirectURI: '/auth/google' });
-    }
-  }
-
   // RSVP User //
   app.post('/rsvp/:id', isAuthenticated, async (req, res) => {
     const barWithUser = await Rsvp.find({
@@ -45,7 +38,7 @@ module.exports = app => {
   });
 
   // Remove RSVP for user //
-  app.delete('/rsvp/:id', async (req, res) => {
+  app.delete('/rsvp/:id', isAuthenticated, async (req, res) => {
     console.log('delete route');
     const deletedBar = await Rsvp.findOneAndUpdate(
       { barId: req.params.id },

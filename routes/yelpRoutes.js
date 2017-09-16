@@ -1,5 +1,4 @@
 const Yelp = require('yelp');
-const yelpQuery = require('../controller/yelpQuery.js');
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
 

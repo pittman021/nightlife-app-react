@@ -28,11 +28,16 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ googleId: profile.id }).then(existingUser => {
         if (existingUser) {
-          done(null, existingUser);
+          return done(null, existingUser);
         } else {
-          new User({ googleId: profile.id })
-            .save()
-            .then(user => done(null, user));
+          const newUser = new User({ googleId: profile.id });
+          newUser.save(function(err, user) {
+            if (err) {
+              return err;
+            } else {
+              return done(null, user);
+            }
+          });
         }
       });
     }

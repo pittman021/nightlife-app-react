@@ -18,7 +18,27 @@
   font-size: large;
 }
 
+.rsvp-button button {
+  display: inline;
+}
+
+.rsvp-button p {
+  display: inline;
+}
+
+.barInfo {
+  width: 200px;
+}
+
+.barInfo button {
+  display: inline;
+}
+
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

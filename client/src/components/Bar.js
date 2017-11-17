@@ -17,27 +17,19 @@ class Bar extends Component {
   }
 
   render() {
+    console.log(this.props.bar);
     return (
-      <div className="col s12 m12 l12 bar">
-        <div className="col s12 m4 l8">
-          <img alt="logo" src={this.props.bar.image} />
-          <span>
-            {this.props.bar.name}
-          </span>
-        </div>
-        <div className="col s12 m4 l2">
-          <button
-            onClick={event => this.addRsvp(event)}
-            className={'btn ' + this.state.bColor}
-            id={this.props.bar.barId}
-          >
+      <li className="collection-item avatar">
+        <img src={this.props.bar.image} alt="" className="circle" />
+        <span className="title">{this.props.bar.name}</span>
+
+        <div className="secondary-content">
+          <p>Going: {this.props.bar.count}</p>
+          <button onClick={event => this.addRsvp(event)} className={'btn ' + this.state.bColor} id={this.props.bar.barId}>
             RSVP
           </button>
-          <p>
-            {this.props.bar.count}
-          </p>
         </div>
-      </div>
+      </li>
     );
   }
 

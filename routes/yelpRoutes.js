@@ -47,11 +47,13 @@ module.exports = app => {
 
 function cleanData(data) {
   const newData = [];
+  console.log(data);
   data.businesses.forEach(bar => {
     newData.push({
       barId: bar.id,
       name: bar.name,
       image: bar.image_url,
+      rating: bar.rating_img_url_small,
       count: 0,
       userGoing: false
     });

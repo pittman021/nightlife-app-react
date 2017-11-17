@@ -18,23 +18,20 @@
   font-size: large;
 }
 
-.rsvp-button button {
-  display: inline;
+.input-field {
+  font-size: 40px !important;
+  height: 5rem !important;
 }
 
-.rsvp-button p {
-  display: inline;
+.search {
+  margin-top: 30px;
 }
 
-.barInfo {
-  width: 200px;
+.search label {
+  font-size: 1rem;
 }
 
-.barInfo button {
-  display: inline;
-}
-
-@keyframes App-logo-spin {
+.search @keyframes app-logo-spin {
   from {
     transform: rotate(0deg);
   }

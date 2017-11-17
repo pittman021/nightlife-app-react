@@ -9,13 +9,8 @@ class Search extends Component {
     return (
       <div className="row search">
         <div className="col s12">
-          <input
-            className="input-field"
-            id="location"
-            value={this.state.term}
-            onChange={event => this.onInputChange(event.target.value)}
-          />
-          <label htmlFor="location">Location</label>
+          <input className="input-field" id="location" value={this.state.term} onChange={event => this.onInputChange(event.target.value)} />
+          <label htmlFor="location">Search</label>
         </div>
       </div>
     );

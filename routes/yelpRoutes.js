@@ -47,7 +47,7 @@ module.exports = app => {
 
 function cleanData(data) {
   const newData = [];
-  console.log(data);
+
   data.businesses.forEach(bar => {
     newData.push({
       barId: bar.id,

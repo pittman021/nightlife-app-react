@@ -1,5 +1,6 @@
 import React from 'react';
 import Bar from './Bar';
+import DelayedList from 'react-delayed-list';
 
 const BarList = props => {
   const barItems = props.bars.map(function(bar) {
@@ -9,7 +10,9 @@ const BarList = props => {
   return (
     <div className="BarList">
       <h3>Bar List</h3>
-      <ul className="collection">{barItems}</ul>
+      <ul className="collection">
+        <DelayedList delay={50}>{barItems}</DelayedList>
+      </ul>
     </div>
   );
 };
